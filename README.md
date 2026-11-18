@@ -4,7 +4,7 @@ These files reproduce the checks described in the pull requests for
 
 - `gpu-convexcore-trimesh-triangle-cull`: per-triangle culling in `convexCoreTrimeshNphase_Kernel32`
 - `fix-querybv32-bounds-lifetime`: the `TestBvh::queryBV32` reference lifetime fix
-- `gpu-convexcore-trimesh-triangle-core`: the `eTRIANGLE` convex core that replaces the per-triangle `PointsCore` (one commit on top of `gpu-convexcore-trimesh-triangle-cull`)
+- `gpu-convexcore-trimesh-triangle-core`: the `eTRIANGLE` convex core that replaces the per-triangle `PointsCore` (two commits on top of `gpu-convexcore-trimesh-triangle-cull`)
 
 The first two branches are single commits on top of PhysX 5.12.0 (`b97365c6ddb32fda8469bc788ec18024862b0368`). "stock" below means that commit without changes.
 
@@ -74,7 +74,7 @@ OVPHYSX_LIB=$PWD/runtime/cull/ovphysx/lib/libovphysx.so LD_LIBRARY_PATH=$OVSTAGE
 
 `bench_lab.py` runs the Go2 rough task with a fixed policy (`--checkpoint`, an RSL-RL actor with 235 inputs; the checkpoint used for the reported numbers is not published) and `--no-native-actuators`, with 1000 warmup control steps.
 
-Run each variant in separate processes and alternate their order. The reported numbers are medians over three processes per variant.
+Run each variant in separate processes and alternate their order. The culling PR reports medians over three processes per variant; the triangle-core PR reports medians over six processes per variant on SM120 and three on SM89.
 
 ## 4. Support function test (`gpu-convexcore-trimesh-triangle-core`)
 
